@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IndexViewModel
+
+<!--Will display team name if a team is selected-->
+<div class="text-center">
+    @if (Model.TeamName != null)
+    {
+        <h1 class="display-4">@Model.TeamName</h1>
+    }
+    else
+    {
+
+        <h1 class="display-4">All Bowlers</h1>
+    }
+</div>
+
+<!--List out all of the bowlers, if there are any-->
+@if (Model.Bowlers.Count() == 0)
+{
+<div class="alert alert-dark text-center" role="alert">
+    <strong>No Registered Bowlers</strong>
+</div>
+}
+else
+{
+<div>
+    <table BORDER="1" CELLPADDING="2" CELLSPACING="3" WIDTH="920" style="background:white;">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Middle Init.</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var x in Model.Bowlers)
+            {
+                <tr>
+                    <td>@x.BowlerFirstName</td>
+                    <td>@x.BowlerMiddleInit</td>
+                    <td>@x.BowlerLastName</td>
+                    <td>@x.BowlerAddress</td>
+                    <td>@x.BowlerCity</td>
+                    <td>@x.BowlerState</td>
+                    <td>@x.BowlerZip</td>
+                    <td>@x.BowlerPhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
+<!--Page numbers-->
+<div page-info="@Model.pageNumberingInfo" page-url-team-name="@Model.TeamName" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark" 
+     page-class-selected="selected" class="btn-group pull-right m-1">
+</div>
